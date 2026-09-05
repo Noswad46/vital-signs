@@ -13,15 +13,15 @@ Audience: health economists, policy people, healthcare investors, informed gener
 Astro + MDX + plain CSS (single stylesheet, CSS custom properties for colour and type
  scale). Deployed to Cloudflare Pages on push to `main`; fully static output, no adapter.
 Posts are markdown in `src/content/posts/`, validated by the zod schema in
-`src/content/config.ts`.
+`src/content.config.ts`.
 
 ## Conventions
 - Ship no client-side JavaScript unless a specific post requires it. Prefer a static SVG.
 - Do not add a dependency without asking first. Say what it costs and what it replaces.
 - Never modify `pubDate` or the slug of an already-published post.
 - Post filenames: `YYYY-MM-slug.md`.
-- Astro's Content Collections API changed in v5 — check current Astro docs before
-  writing collection code; do not generate it from memory.
+- Project is on Astro 7.x. Check current Astro docs before writing collection or
+  config code; do not generate from memory.
 - Body copy is serif, single column, generous line height. Editorial, not SaaS.
 - Never edit the prose of a post unless explicitly asked. Fixing typos is fine;
   rewriting sentences is not. My voice is the point of the site.
