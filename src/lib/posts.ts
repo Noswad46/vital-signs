@@ -14,12 +14,19 @@ export function urlOf(post: Post): string {
   return `/posts/${slugOf(post)}/`;
 }
 
-/** e.g. "4 September 2026" */
+/**
+ * e.g. "4 September 2026".
+ *
+ * Formatted in UTC deliberately. A bare `pubDate: 2026-09-04` in frontmatter
+ * parses as UTC midnight, so formatting in a timezone behind UTC would render
+ * it as the previous day.
+ */
 export function formatDate(date: Date): string {
   return date.toLocaleDateString('en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
+    timeZone: 'UTC',
   });
 }
 
