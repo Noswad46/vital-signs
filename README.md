@@ -7,6 +7,10 @@ and is served by Cloudflare Pages.
 
 ## Development
 
+Requires Node 22.23.2 (the version in `.nvmrc`). With nvm installed, `nvm use`
+in this directory switches to it. Cloudflare Pages reads the same file, so local
+and deploy builds stay on one version.
+
 ```sh
 npm install
 npm run dev        # local dev server

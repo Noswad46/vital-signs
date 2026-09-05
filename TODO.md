@@ -11,9 +11,3 @@
 - [ ] Delete the placeholder post `src/content/posts/2026-09-hello.md` once a
       real post exists.
 
-## Nice to have
-
-- [ ] Pin the Node version for Cloudflare Pages builds (`.nvmrc` or the
-      `NODE_VERSION` environment variable). A transitive dependency, `undici`,
-      wants Node >= 22.19.0; local Node is 22.14.0, which only warns today but
-      could fail a stricter build later.
