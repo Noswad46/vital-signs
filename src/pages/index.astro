@@ -1,14 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getPosts, urlOf, formatDate } from '../lib/posts';
+import { SITE_NAME, DESCRIPTION } from '../consts';
 
 const posts = await getPosts();
 ---
 
-<BaseLayout
-  title="Vital Signs"
-  description="Health economics, health policy and healthcare analytics. Written by Euan."
->
+<BaseLayout title={SITE_NAME} description={DESCRIPTION}>
   {posts.length === 0 ? (
     <p>No posts yet.</p>
   ) : (
