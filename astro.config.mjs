@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -8,9 +9,9 @@ export default defineConfig({
   // so no adapter is needed.
   output: 'static',
 
-  // TODO(euan): set this to the real domain before launch. It is used for
-  // canonical URLs and absolute links in feeds.
-  site: 'https://vitalsigns.pages.dev',
+  // Used for canonical URLs, Open Graph tags, the RSS feed and the sitemap.
+  // Temporary Pages subdomain — see TODO.md for the real domain switch.
+  site: 'https://vital-signs.pages.dev',
 
-  integrations: [mdx()],
+  integrations: [mdx(), sitemap()],
 });

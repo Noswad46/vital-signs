@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { AUTHOR } from '../consts';
+---
+
+<BaseLayout
+  title="About"
+  description="Euan Dawson — health economist, previously Pfizer market access, now an MSBA candidate at UC San Diego's Rady School."
+>
+  <article>
+    <header class="post-header">
+      <h1 class="post-header__title">About</h1>
+    </header>
+
+    <div class="prose">
+      <p>
+        {AUTHOR}. Health economist — previously Pfizer market access, now an MSBA
+        candidate at UC San Diego's Rady School of Management.
+      </p>
+
+      <p>
+        This blog covers health economics, health policy and healthcare analytics.
+      </p>
+
+      <p class="disclaimer">
+        Views are my own and do not represent any current or former employer or
+        institution.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
