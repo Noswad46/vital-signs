@@ -1,0 +1,291 @@
+/* ==========================================================================
+   Vital Signs — the whole stylesheet.
+   Read it top to bottom: variables, reset, base type, layout, then components.
+   Edit the variables and most of the site follows.
+   ========================================================================== */
+
+:root {
+  /* --- Colour -------------------------------------------------------------
+     Warm off-white paper, near-black ink. Low contrast on secondary text so
+     the body copy is clearly the main event. */
+  --ink:          #1a1a1a;   /* body copy */
+  --ink-muted:    #6b6b6b;   /* dates, captions, metadata */
+  --ink-faint:    #a3a3a3;   /* rules, borders */
+  --paper:        #fbfaf7;   /* page background */
+  --paper-inset:  #f2efe9;   /* code blocks, blockquote background */
+  --accent:       #7a2e2e;   /* links; a dark clinical red */
+  --accent-hover: #4a1a1a;
+
+  /* --- Type ---------------------------------------------------------------
+     One serif for everything, with the sans reserved for metadata and UI.
+     System stacks only — no web fonts, no network request, no layout shift. */
+  --font-serif: Charter, "Bitstream Charter", "Iowan Old Style", "Source Serif Pro",
+                Georgia, "Times New Roman", serif;
+  --font-sans:  -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono:  ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Type scale. Roughly a major third (1.25) off a 20px body.
+     Change --step-0 and the whole scale moves with it. */
+  --step--1: 0.8rem;     /* 12.8px — captions, tags */
+  --step-0:  1rem;       /* 16px   — set to 20px on the body below */
+  --step-1:  1.25rem;
+  --step-2:  1.563rem;
+  --step-3:  1.953rem;
+  --step-4:  2.441rem;
+
+  --leading-body:  1.7;   /* generous, for long reading */
+  --leading-tight: 1.2;   /* headings */
+
+  /* --- Layout ------------------------------------------------------------- */
+  --measure: 34rem;       /* ~68 characters. The single column. */
+  --gutter:  1.5rem;
+  --rhythm:  1.6rem;      /* default vertical space between blocks */
+}
+
+/* --------------------------------------------------------------------------
+   Reset — only what is actually needed.
+   -------------------------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body, h1, h2, h3, h4, p, figure, blockquote, dl, dd, ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol { list-style: none; }
+
+img, svg { max-width: 100%; height: auto; display: block; }
+
+/* --------------------------------------------------------------------------
+   Base
+   -------------------------------------------------------------------------- */
+
+html {
+  font-size: 125%;            /* 20px base. The single lever for overall size. */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+  text-decoration-thickness: 0.06em;
+}
+
+a:hover { color: var(--accent-hover); }
+
+/* Keyboard focus stays visible — this is the one thing not to delete. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Layout — one column, centred, nothing else.
+   -------------------------------------------------------------------------- */
+
+.wrap {
+  max-width: var(--measure);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.site-header {
+  padding-block: 2.5rem 3.5rem;
+}
+
+.site-header__title {
+  font-size: var(--step-1);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+}
+
+.site-header__title a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.site-header__tagline {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  margin-top: 0.3rem;
+}
+
+.site-footer {
+  margin-top: 5rem;
+  padding-block: 2rem 3rem;
+  border-top: 1px solid var(--ink-faint);
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Post list (home page)
+   -------------------------------------------------------------------------- */
+
+.post-list > li + li {
+  margin-top: 2.5rem;
+}
+
+.post-list__title {
+  font-size: var(--step-2);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+}
+
+.post-list__title a { color: var(--ink); text-decoration: none; }
+.post-list__title a:hover { color: var(--accent); }
+
+.post-list__description {
+  margin-top: 0.4rem;
+  color: var(--ink);
+}
+
+/* Shared metadata line: date, reading context, tags. */
+.meta {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  letter-spacing: 0.01em;
+}
+
+.post-list__meta { margin-top: 0.5rem; }
+
+/* --------------------------------------------------------------------------
+   Article — the reading experience. Everything below is body copy.
+   -------------------------------------------------------------------------- */
+
+.post-header {
+  margin-bottom: 2.5rem;
+}
+
+.post-header__title {
+  font-size: var(--step-4);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.post-header__description {
+  margin-top: 0.7rem;
+  font-size: var(--step-1);
+  color: var(--ink-muted);
+  line-height: 1.45;
+}
+
+.post-header__meta { margin-top: 1rem; }
+
+/* `.prose` wraps rendered markdown. Element selectors are scoped to it so the
+   markdown needs no classes of its own. */
+
+.prose > * + * { margin-top: var(--rhythm); }
+
+.prose h2 {
+  font-size: var(--step-2);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.01em;
+  margin-top: 2.8rem;
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+  line-height: var(--leading-tight);
+  margin-top: 2.2rem;
+}
+
+.prose ul, .prose ol {
+  padding-left: 1.4rem;
+}
+
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li + li { margin-top: 0.4rem; }
+
+.prose blockquote {
+  border-left: 2px solid var(--ink-faint);
+  padding: 0.2rem 0 0.2rem 1.2rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--ink-faint);
+  margin-block: 2.5rem;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--paper-inset);
+  padding: 0.12em 0.32em;
+  border-radius: 3px;
+}
+
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.8em;
+  line-height: 1.55;
+  background: var(--paper-inset);
+  padding: 1rem 1.1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+/* Code inside a pre block inherits the block's styling, not the inline pill. */
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Tables and figures may exceed the measure; let them breathe and scroll. */
+.prose figure { margin-block: 2.2rem; }
+
+.prose figcaption {
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  margin-top: 0.6rem;
+  line-height: 1.45;
+}
+
+.prose .table-scroll { overflow-x: auto; }
+
+.prose table {
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: var(--step--1);
+  width: 100%;
+}
+
+.prose th, .prose td {
+  text-align: left;
+  padding: 0.5rem 0.8rem 0.5rem 0;
+  border-bottom: 1px solid var(--ink-faint);
+}
+
+.prose th { font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   Print — posts should print cleanly.
+   -------------------------------------------------------------------------- */
+
+@media print {
+  body { background: #fff; color: #000; }
+  .site-header__tagline, .site-footer { display: none; }
+  a { text-decoration: none; color: #000; }
+}
