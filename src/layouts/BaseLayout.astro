@@ -9,7 +9,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-// Home page passes the site name itself; everything else gets "Title — Vital Signs".
+// Home page passes the site name itself; everything else gets "Title — Site Name".
 const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;

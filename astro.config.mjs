@@ -5,8 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // Fully static build to dist/. Cloudflare Pages just serves the directory,
-  // so no adapter is needed.
+  // Fully static build to dist/. Cloudflare serves the directory as a Worker
+  // with static assets, so no adapter is needed.
   output: 'static',
 
   // Used for canonical URLs, Open Graph tags, the RSS feed and the sitemap.

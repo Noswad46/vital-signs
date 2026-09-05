@@ -1,14 +1,14 @@
-# Vital Signs
+# New Healthcare Frontier
 
 A personal blog on health economics, health policy and healthcare analytics.
 
 Astro + MDX, plain CSS, no client-side JavaScript. Builds to a static `dist/`
-and is served by Cloudflare Pages.
+and is served by Cloudflare as a Worker with static assets.
 
 ## Development
 
 Requires Node 22.23.2 (the version in `.nvmrc`). With nvm installed, `nvm use`
-in this directory switches to it. Cloudflare Pages reads the same file, so local
+in this directory switches to it. The Cloudflare build reads the same file, so local
 and deploy builds stay on one version.
 
 ```sh

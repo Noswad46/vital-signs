@@ -2,7 +2,7 @@
 // about page and the RSS feed all read from here, so these strings cannot
 // drift apart.
 
-export const SITE_NAME = 'Vital Signs';
+export const SITE_NAME = 'New Healthcare Frontier';
 
 export const AUTHOR = 'Euan Dawson';
 

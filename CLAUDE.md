@@ -1,4 +1,4 @@
-# Project: Vital Signs
+# Project: New Healthcare Frontier
 
 Personal blog on health economics, health policy and healthcare analytics.
 Author: Euan — health economist, ex-Pfizer market access, MSBA candidate at UC San Diego.
@@ -11,7 +11,8 @@ Audience: health economists, policy people, healthcare investors, informed gener
 
 ## Stack
 Astro + MDX + plain CSS (single stylesheet, CSS custom properties for colour and type
- scale). Deployed to Cloudflare Pages on push to `main`; fully static output, no adapter.
+ scale). Deployed to Cloudflare on push to `main` as a Worker with static assets;
+fully static output, no adapter.
 Posts are markdown in `src/content/posts/`, validated by the zod schema in
 `src/content.config.ts`.
 
