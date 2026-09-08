@@ -8,6 +8,8 @@
       Open Graph tags, `rss.xml` and `sitemap-*.xml`, so all four are wrong
       until it is changed. Update the `site` value, rebuild, and confirm the
       generated `dist/rss.xml` and `dist/sitemap-0.xml` carry the new host.
-- [ ] Delete the placeholder post `src/content/posts/2026-09-hello.md` once a
-      real post exists.
+- [ ] Replace or delete the five placeholder posts in `src/content/posts/`
+      (`essay-one`, `essay-two`, `short-post-one`, `short-post-two`,
+      `short-post-three`). They are published, not drafts, so they are live on
+      the site.
 
