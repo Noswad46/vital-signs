@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE_NAME, TAGLINE, AUTHOR } from '../consts';
+import { SITE_NAME } from '../consts';
 
 interface Props {
   title: string;
@@ -56,7 +56,7 @@ const isHome = Astro.url.pathname === '/';
         institution.
       </p>
       <p class="site-footer__meta">
-        {AUTHOR} · <a href="/rss.xml">RSS</a>
+        <a href="/rss.xml">RSS</a>
       </p>
     </footer>
   </body>
