@@ -13,6 +13,9 @@ const posts = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
+    // Groups the post on the home page. 'essay' for longer pieces,
+    // 'note' for shorter ones.
+    category: z.enum(['essay', 'note']).default('note'),
     draft: z.boolean().default(false),
   }),
 });

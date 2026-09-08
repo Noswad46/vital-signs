@@ -1,30 +1,73 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getPosts, urlOf, formatDate } from '../lib/posts';
-import { SITE_NAME, DESCRIPTION } from '../consts';
+import { getPosts, urlOf } from '../lib/posts';
+import { SITE_NAME, DESCRIPTION, AUTHOR } from '../consts';
+
+// One section per category, in the order they appear on the page. A category
+// with no published posts renders nothing at all.
+const SECTIONS = [
+  { key: 'essay', label: 'Essays' },
+  { key: 'note', label: 'Short posts' },
+] as const;
+
+// Static section, not drawn from the content collection.
+const SCHOLAR_URL = 'https://scholar.google.com/citations?user=rCH1NjoAAAAJ&hl=en';
 
 const posts = await getPosts();
+const sections = SECTIONS.map(({ key, label }) => ({
+  label,
+  posts: posts.filter((post) => post.data.category === key),
+})).filter((section) => section.posts.length > 0);
 ---
 
 <BaseLayout title={SITE_NAME} description={DESCRIPTION}>
-  {posts.length === 0 ? (
-    <p>No posts yet.</p>
+  <div class="bio">
+    <p>
+      {AUTHOR} is a researcher working on the economics, policy and analytics of
+      health care. His central interest is the adoption of AI-driven health
+      technologies in health systems — how they are evaluated, how they are paid
+      for, and what the evidence actually supports.
+    </p>
+
+    {/*
+      TODO(euan): the Pfizer sentence is incomplete. Your note ended mid-clause
+      — "...on the pneumococcal vaccine and supported the". Only the confirmed
+      part is written below; add the rest when you have it.
+    */}
+    <p>
+      Previously he worked in industry as an economist at Pfizer, on the
+      pneumococcal vaccine.
+    </p>
+
+    <p>
+      He is currently a candidate for the Master of Science in Business Analytics
+      at the Rady School of Management, University of California, San Diego,
+      where he is concentrating on agentic AI engineering and data. He holds an
+      MSc in International Health Policy and Health Economics from the London
+      School of Economics, and an MA (Hons) in Economics from the University of
+      Edinburgh.
+    </p>
+  </div>
+
+  {sections.length === 0 ? (
+    <p class="bio">No posts yet.</p>
   ) : (
-    <ul class="post-list">
-      {posts.map((post) => (
-        <li>
-          <h2 class="post-list__title">
-            <a href={urlOf(post)}>{post.data.title}</a>
-          </h2>
-          <p class="post-list__description">{post.data.description}</p>
-          <p class="meta post-list__meta">
-            <time datetime={post.data.pubDate.toISOString()}>
-              {formatDate(post.data.pubDate)}
-            </time>
-            {post.data.tags.length > 0 && <> · {post.data.tags.join(', ')}</>}
-          </p>
-        </li>
-      ))}
-    </ul>
+    sections.map((section) => (
+      <section class="index-section">
+        <h2 class="index-section__heading">{section.label}</h2>
+        <ul class="link-list">
+          {section.posts.map((post) => (
+            <li><a href={urlOf(post)}>{post.data.title}</a></li>
+          ))}
+        </ul>
+      </section>
+    ))
   )}
+
+  <section class="index-section">
+    <h2 class="index-section__heading">Research</h2>
+    <ul class="link-list">
+      <li><a href={SCHOLAR_URL}>Google Scholar</a></li>
+    </ul>
+  </section>
 </BaseLayout>

@@ -40,3 +40,14 @@ export async function getPosts(): Promise<Post[]> {
   );
   return posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
+
+/**
+ * Posts in one category, newest first. The home page renders a section per
+ * category, so an empty category simply renders nothing.
+ */
+export async function getPostsByCategory(
+  category: Post['data']['category'],
+): Promise<Post[]> {
+  const posts = await getPosts();
+  return posts.filter((post) => post.data.category === category);
+}

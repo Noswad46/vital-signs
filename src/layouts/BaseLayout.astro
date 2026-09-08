@@ -12,7 +12,7 @@ const { title, description } = Astro.props;
 // Home page passes the site name itself; everything else gets "Title — Site Name".
 const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const path = Astro.url.pathname;
+const isHome = Astro.url.pathname === '/';
 ---
 
 <html lang="en">
@@ -39,13 +39,11 @@ const path = Astro.url.pathname;
 
   <body>
     <header class="site-header wrap">
-      <p class="site-header__title"><a href="/">{SITE_NAME}</a></p>
-      <p class="site-header__tagline">{TAGLINE}</p>
-      <nav class="site-nav" aria-label="Main">
-        <a href="/" aria-current={path === '/' ? 'page' : undefined}>Writing</a>
-        <a href="/about/" aria-current={path.startsWith('/about') ? 'page' : undefined}>About</a>
-        <a href="/rss.xml">RSS</a>
-      </nav>
+      {isHome ? (
+        <h1 class="site-header__title">{SITE_NAME}</h1>
+      ) : (
+        <p class="site-header__title"><a href="/">{SITE_NAME}</a></p>
+      )}
     </header>
 
     <main class="wrap">
@@ -53,7 +51,13 @@ const path = Astro.url.pathname;
     </main>
 
     <footer class="site-footer wrap">
-      <p>Written by {AUTHOR}.</p>
+      <p>
+        Views are my own and do not represent any current or former employer or
+        institution.
+      </p>
+      <p class="site-footer__meta">
+        {AUTHOR} · <a href="/rss.xml">RSS</a>
+      </p>
     </footer>
   </body>
 </html>
